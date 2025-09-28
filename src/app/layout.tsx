@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Navigation from "@/components/Navigation";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,31 +20,68 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="it">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          margin: 0,
+        }}
       >
         <header style={{ backgroundColor: "#00000077", padding: "10px" }}>
-          <div style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div
+            style={{
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <div>
-              <img src="/icon.jpeg" alt="Logo" width={75} height={100} style={{ borderRadius: "100%", border: "1px solid white" }} />
+              <a href="https://github.com/ArtuCN" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/icon.jpeg"
+                alt="Logo"
+                width={75}
+                height={100}
+                style={{
+                borderRadius: "100%",
+                border: "1px solid white",
+                cursor: "pointer",
+                }}
+              />
+              </a>
             </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              <button style={{ border: "1px solid white", padding: "5px 10px", borderRadius: "5px" }}>Contatti</button>
-              <button style={{ border: "1px solid white", padding: "5px 10px", borderRadius: "5px" }}>Cambia Lingua</button>
-              <button style={{ border: "1px solid white", padding: "5px 10px", borderRadius: "5px" }}>Chi Sono</button>
-            </div>
+            <Navigation />
           </div>
         </header>
-        {children}
-        <footer style={{ backgroundColor: "#00000077", padding: "10px", textAlign: "center", marginTop: "20px", color : "white", position: 'absolute', bottom: '0', width: '100%' }}>
+
+        <main style={{ flex: 1, display: "flex" }}>{children}</main>
+
+        <footer
+          style={{
+            backgroundColor: "#00000077",
+            padding: "10px",
+            textAlign: "center",
+            color: "white",
+          }}
+        >
           <p>© 2025 Arturo Conti. Tutti i diritti riservati.</p>
         </footer>
       </body>
     </html>
   );
 }
+
+const buttonStyle: React.CSSProperties = {
+  border: "1px solid white",
+  padding: "5px 10px",
+  borderRadius: "5px",
+  background: "transparent",
+  color: "white",
+  cursor: "pointer",
+};
